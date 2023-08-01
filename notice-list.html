@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>인천버스 관리자</title>
+		<meta name="description" content="인천버스 관리자">
+		<meta name="author" content="minks">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+		
+		<link href="css/reset.css" type="text/css" rel="stylesheet">
+		<link href="css/font.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui.min.css" type="text/css" rel="stylesheet">
+		<link href="css/admin.css" type="text/css" rel="stylesheet">
+		
+		<!--[if lt IE 9]>
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/html5shiv.js"></script>
+		<![endif]-->
+		
+		<!--[if gte IE 9]>
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<![endif]-->
+		
+		<!--[if !IE]>--> 
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<!--<![endif]-->
+		
+		<script src="js/jquery-migrate-1.4.1.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/admin-function.js"></script>
+	</head>
+
+	<body>
+        <div class="wrap">
+            <!-- content -->
+            <div class="c-wrap">
+                <!-- c-page : 기본페이지 -->
+                <section class="c-page">
+                    <!-- page-top-area : 타이틀 영역 -->
+                    <article class="page-top-area">
+                        <div class="page-top-tit">공지사항</div>
+                    </article>
+                    
+                    <!-- page-search-area : 검색 영역 -->
+                    <article class="page-search-area">
+                        <div class="page-search-item">
+                            <div class="page-search-left">
+                                <div class="c-search-box">
+                                    <input type="text" id="" name="" class="c-search-input">
+                                    <input type="button" value="검색" class="c-search-btn">
+                                </div>
+                                <select id="" name="">
+                                    <option value="">종류</option>
+                                    <option value="text">텍스트</option>
+                                    <option value="image">이미지</option>
+                                    <option value="youtube">유튜브</option>
+                                </select>
+                                <select id="" name="">
+                                    <option value="">노출상태</option>
+                                    <option value="Y">노출</option>
+                                    <option value="N">노출안함</option>
+                                </select>
+                            </div>
+                            <div class="page-search-right">
+                                <button type="button" class="reload-btn" title="새로고침" onclick="">
+                                    <span>새로고침</span>
+                                </button>
+                                <button type="button" class="add-btn" title="공지사항 추가" onclick="openNoticeInsertLayer(this);">
+                                    <span>공지사항 추가</span>
+                                </button>
+                                <button type="button" class="delete-btn" title="공지사항 삭제" onclick="setNoticeDelete(this);">
+                                    <span>공지사항 삭제</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- page-list-area : 목록 영역 -->
+                    <article class="page-list-area">
+                        <div class="c-table-area">
+                            <!-- notice-list-table : 공지사항 목록 테이블 -->
+                            <table class="c-table notice-list-table">
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="*">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="15%">
+                                    <col width="10%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>NO</th>
+                                        <th>제목</th>
+                                        <th>종류</th>
+                                        <th>등록자</th>
+                                        <th>등록일자</th>
+                                        <th>노출상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- data-notice-idx : 공지사항 인덱스번호 -->
+                                    <tr data-notice-idx="6">
+                                        <td>6</td>
+                                        <td class="c-left">내용이 유튜브 링크로 작성된 공지사항입니다.</td>
+                                        <td>유튜브</td>
+                                        <td>관리자</td>
+                                        <td>2023-07-31 00:00:00</td>
+                                        <td>
+                                            <label class="c-switch-checkbox">
+                                                <input type="checkbox" id="" name="" checked>
+                                                <span class="c-switch-bar"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <!-- data-notice-idx : 공지사항 인덱스번호 -->
+                                    <tr data-notice-idx="5">
+                                        <td>5</td>
+                                        <td class="c-left">내용이 이미지 첨부로 작성된 공지사항입니다.</td>
+                                        <td>이미지</td>
+                                        <td>관리자</td>
+                                        <td>2023-07-31 00:00:00</td>
+                                        <td>
+                                            <label class="c-switch-checkbox">
+                                                <input type="checkbox" id="" name="" checked>
+                                                <span class="c-switch-bar"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <!-- data-notice-idx : 공지사항 인덱스번호 -->
+                                    <tr data-notice-idx="4">
+                                        <td>4</td>
+                                        <td class="c-left">내용이 텍스트로 작성된 공지사항입니다.</td>
+                                        <td>텍스트</td>
+                                        <td>관리자</td>
+                                        <td>2023-07-31 00:00:00</td>
+                                        <td>
+                                            <label class="c-switch-checkbox">
+                                                <input type="checkbox" id="" name="" checked>
+                                                <span class="c-switch-bar"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <!-- data-notice-idx : 공지사항 인덱스번호 -->
+                                    <tr data-notice-idx="3">
+                                        <td>3</td>
+                                        <td class="c-left">내용이 유튜브 링크로 작성된 공지사항입니다.</td>
+                                        <td>유튜브</td>
+                                        <td>관리자</td>
+                                        <td>2023-07-31 00:00:00</td>
+                                        <td>
+                                            <label class="c-switch-checkbox">
+                                                <input type="checkbox" id="" name="" checked>
+                                                <span class="c-switch-bar"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <!-- data-notice-idx : 공지사항 인덱스번호 -->
+                                    <tr data-notice-idx="2">
+                                        <td>2</td>
+                                        <td class="c-left">내용이 이미지 첨부로 작성된 공지사항입니다.</td>
+                                        <td>이미지</td>
+                                        <td>관리자</td>
+                                        <td>2023-07-31 00:00:00</td>
+                                        <td>
+                                            <label class="c-switch-checkbox">
+                                                <input type="checkbox" id="" name="" checked>
+                                                <span class="c-switch-bar"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <!-- data-notice-idx : 공지사항 인덱스번호 -->
+                                    <tr data-notice-idx="1">
+                                        <td>1</td>
+                                        <td class="c-left">내용이 텍스트로 작성된 공지사항입니다.</td>
+                                        <td>텍스트</td>
+                                        <td>관리자</td>
+                                        <td>2023-07-31 00:00:00</td>
+                                        <td>
+                                            <label class="c-switch-checkbox">
+                                                <input type="checkbox" id="" name="">
+                                                <span class="c-switch-bar"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="page-bottom-area">
+                            <div class="page-bottom-item">
+                                <div class="page-bottom-center">
+                                    <div class="c-paging-area">
+                                        <ul class="c-paging">
+                                            <li class="first-arrow">
+                                                <a href="#">◀◀</a>
+                                            </li>
+                                            <li class="prev-arrow">
+                                                <a href="#">◀</a>
+                                            </li>
+                                            <li class="on">
+                                                <a href="#">1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">3</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">4</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">5</a>
+                                            </li>
+                                            <li class="next-arrow">
+                                                <a href="#">▶</a>
+                                            </li>
+                                            <li class="last-arrow">
+                                                <a href="#">▶▶</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="c-paging-cnt">1 ~ 6 of 6</div>
+                                </div>
+                            </div>
+                            <div class="page-bottom-item">
+                                <div class="page-bottom-right">
+                                    <button type="button" class="reload-btn" title="새로고침" onclick="">
+                                        <span>새로고침</span>
+                                    </button>
+                                    <button type="button" class="add-btn" title="공지사항 추가" onclick="openNoticeInsertLayer(this);">
+                                        <span>공지사항 추가</span>
+                                    </button>
+                                    <button type="button" class="delete-btn" title="공지사항 삭제" onclick="setNoticeDelete(this);">
+                                        <span>공지사항 삭제</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            
+            <!-- layer -->
+            <div class="l-wrap">
+                <!-- alert창 -->
+                <div class="l-area" id="alert-layer">
+                    <div class="l-box">
+                        <div class="l-con-area">
+                            <div class="l-con"></div>
+                        </div>
+                        <div class="l-btn-area">
+                            <button type="button" class="confirm-btn">
+                                <span>확인</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="l-mask"></div>
+                </div>
+                
+                <!-- confirm창 -->
+                <div class="l-area" id="confirm-layer">
+                    <div class="l-box">
+                        <div class="l-con-area">
+                            <div class="l-con"></div>
+                        </div>
+                        <div class="l-btn-area">
+                            <button type="button" class="confirm-btn">
+                                <span>확인</span>
+                            </button>
+                            <button type="button" class="close-btn" onclick="closeLayer(this);">
+                                <span>취소</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="l-mask"></div>
+                </div>
+                
+                <!-- 공지사항 추가창 -->
+                <div class="l-area" id="notice-insert-layer">
+                    <div class="l-box">
+                        <div class="l-tit-area">
+                            <div class="l-tit">공지사항 추가</div>
+                            <button type="button" class="l-tit-btn" onclick="closeLayer(this);">
+                                <span>레이어닫기</span>
+                            </button>
+                        </div>
+                        <div class="l-con-area">
+                            <div class="l-con-item">
+                                <div class="c-table-area">
+                                    <table class="c-table">
+                                        <colgroup>
+                                            <col width="150">
+                                            <col width="*">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <th>제목</th>
+                                                <td>
+                                                    <input type="text" id="" name="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>종류</th>
+                                                <td>
+                                                    <!-- notice-type : 공지사항 종류 -->
+                                                    <select id="" name="" class="notice-type" onchange="setNoticeType(this);">
+                                                        <option value="text" selected>텍스트</option>
+                                                        <option value="image">이미지</option>
+                                                        <option value="youtube">유튜브</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <!-- notice-text : 공지사항 종류가 텍스트일 경우 노출 -->
+                                            <tr class="notice-content notice-text">
+                                                <th>내용</th>
+                                                <td>
+                                                    <textarea id="" name=""></textarea>
+                                                </td>
+                                            </tr>
+                                            <!-- notice-image : 공지사항 종류가 이미지일 경우 노출 -->
+                                            <tr class="notice-content notice-image">
+                                                <th>이미지 첨부</th>
+                                                <td>
+                                                    <div class="c-file-input">
+                                                        <input type="text" id="" name="" class="c-file-txt" disabled>
+                                                        <label>
+                                                            <input type="file" id="" name="">파일 선택
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- notice-youtube : 공지사항 종류가 유튜브일 경우 노출 -->
+                                            <tr class="notice-content notice-youtube">
+                                                <th>유튜브 링크</th>
+                                                <td>
+                                                    <input type="text" id="" name="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>노출상태</th>
+                                                <td>
+                                                    <label class="c-switch-checkbox">
+                                                        <input type="checkbox" id="" name="">
+                                                        <span class="c-switch-bar"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="l-btn-area">
+                            <button type="button" class="l-btn" onclick="">
+                                <span>추가</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="l-mask"></div>
+                </div>
+                
+                <!-- 공지사항 수정창 -->
+                <div class="l-area" id="notice-update-layer">
+                    <div class="l-box">
+                        <div class="l-tit-area">
+                            <div class="l-tit">공지사항 수정</div>
+                            <button type="button" class="l-tit-btn" onclick="closeLayer(this);">
+                                <span>레이어닫기</span>
+                            </button>
+                        </div>
+                        <div class="l-con-area">
+                            <div class="l-con-item">
+                                <div class="c-table-area">
+                                    <table class="c-table">
+                                        <colgroup>
+                                            <col width="150">
+                                            <col width="*">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <th>제목</th>
+                                                <td>
+                                                    <input type="text" id="" name="" value="내용이 유튜브 링크로 작성된 공지사항입니다.">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>종류</th>
+                                                <td>
+                                                    <!-- notice-type : 공지사항 종류 -->
+                                                    <select id="" name="" class="notice-type" onchange="setNoticeType(this);">
+                                                        <option value="text">텍스트</option>
+                                                        <option value="image">이미지</option>
+                                                        <option value="youtube" selected>유튜브</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <!-- notice-text : 공지사항 종류가 텍스트일 경우 노출 -->
+                                            <tr class="notice-content notice-text">
+                                                <th>내용</th>
+                                                <td>
+                                                    <textarea id="" name=""></textarea>
+                                                </td>
+                                            </tr>
+                                            <!-- notice-image : 공지사항 종류가 이미지일 경우 노출 -->
+                                            <tr class="notice-content notice-image">
+                                                <th>이미지 첨부</th>
+                                                <td>
+                                                    <div class="c-file-input">
+                                                        <input type="text" id="" name="" class="c-file-txt" disabled>
+                                                        <label>
+                                                            <input type="file" id="" name="">파일 선택
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- notice-youtube : 공지사항 종류가 유튜브일 경우 노출 -->
+                                            <tr class="notice-content notice-youtube">
+                                                <th>유튜브 링크</th>
+                                                <td>
+                                                    <input type="text" id="" name="" value="m8NCeSvbm7Y">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>노출상태</th>
+                                                <td>
+                                                    <label class="c-switch-checkbox">
+                                                        <input type="checkbox" id="" name="" checked>
+                                                        <span class="c-switch-bar"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>등록자</th>
+                                                <td>관리자</td>
+                                            </tr>
+                                            <tr>
+                                                <th>등록일자</th>
+                                                <td>2023-07-31 00:00:00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="l-btn-area">
+                            <button type="button" class="l-btn" onclick="">
+                                <span>수정</span>
+                            </button>
+                            <button type="button" class="l-btn" onclick="">
+                                <span>삭제</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="l-mask"></div>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>
